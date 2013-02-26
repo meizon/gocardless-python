@@ -134,7 +134,8 @@ class Subscription(Resource):
 
     def cancel(self):
         path = "{0}/cancel".format(self.endpoint.replace(":id", self.id))
-        return self.client.api_put(path)
+        result = self.client.api_put(path)
+        self.status = result['status']
 
 
 class PreAuthorization(Resource):
@@ -148,7 +149,8 @@ class PreAuthorization(Resource):
 
     def cancel(self):
         path = "{0}/cancel".format(self.endpoint.replace(":id", self.id))
-        self.client.api_put(path)
+        result = self.client.api_put(path)
+        self.status = result['status']
 
 
 class Bill(Resource):
